@@ -1,26 +1,55 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import Counter from './Counter.js'
+import BmiCounter from './BMI.js'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const styles = {
+  box: {
+    height:'150px',
+    width:'150px',
+    border:'black solid 1px',
+    margin:'10px'
+  }
 }
 
-export default App;
+export default class Box extends React.Component
+{
+     state = {
+     colour:'red'
+   }
+   
+   constructor(props) {
+     super(props);
+     this.toggleBox = this.toggleBox.bind(this);
+   }
+  
+   render() {
+     return (
+    <div>
+    <div>
+      <div
+        style={{...styles.box, backgroundColor:this.state.colour}}
+        onMouseOver={this.toggleBox} onMouseOut={this.toggleBox}/>
+    </div>
+    <Counter/>
+    <BmiCounter/>
+    </div>
+    );
+  }
+  
+  toggleBox(){
+      
+      if (this.state.colour == 'blue'){
+        this.setState({
+          colour:'red'
+        })
+        
+      }
+      else {
+        this.setState({
+          colour:'blue'
+        })
+      
+      }
+  }
+  
+}
